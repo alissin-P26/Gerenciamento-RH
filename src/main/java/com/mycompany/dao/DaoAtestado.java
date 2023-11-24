@@ -19,58 +19,38 @@ import java.sql.ResultSet;
 public class DaoAtestado extends BancoDeDadosMySql {
     String sql;
     
-//    public Boolean inserir(int id, int idDados_pessoais_funcionario, String nome, String data_afastamneto, String motivo, ){
-//        try{
-//            sql = "INSERT INTO DADOS_PESSOAIS_FUNCIONARIO (ID, ID_CIDADE, ID_ESTADO_CIVIL, NOME, SOBRENOME, GENERO, RG, CPF, SETOR, HORARIOTRABALHOS, SALARIO, STATUS, ADMISSAO, DEMISSAO,) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//            
-//            setStatement(getConexao().prepareStatement(sql));
-//            
-//            getStatement().setInt(1, id);
-//            getStatement().setInt(2, idCidade);
-//            getStatement().setInt(3, idEstadoCivil);
-//            getStatement().setString(4, nome);
-//            getStatement().setString(5, sobrenome);
-//            getStatement().setInt(6, idade);
-//            getStatement().setString(7, genero);
-//            getStatement().setString(8, rg);
-//            getStatement().setString(9, cpf);
-//            getStatement().setString(10, setor);
-//            getStatement().setInt(11, horarioTrabralhos);
-//            getStatement().setDouble(12, salaraio);
-//            getStatement().setString(13, status);
-//            getStatement().setString(14, admissao);
-//            getStatement().setString(15, demissao);
-//            
-//            getStatement().executeUpdate();
-//            
-//            return true;
-//        }catch(Exception e){
-//            System.out.println(e.getMessage());
-//            return false;
-//        }
-//    } 
+    public Boolean inserir(int id, int id_dados_pessoais_funcionario, String nome, String data_afastamento, String motivo){
+       try{
+            sql = "INSERT INTO ATESTADOS (ID, ID_DADOS_PESSOAIS_FUNCIONARIO, NOME, DATA_AFASTAMENTO, MOTIVO) VALUES (?, ?, ?, ?, ?)";
+           
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setInt(1, id);
+            getStatement().setInt(2, id_dados_pessoais_funcionario);          
+            getStatement().setString(3, nome);
+            getStatement().setString(5, data_afastamento);           
+            getStatement().setString(6, motivo);
+          
+           getStatement().executeUpdate();
+           
+            return true;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+       }
+   } 
     
-    public Boolean alterar(int id, int idCidade, int idEstadoCivil, String nome, String sobrenome, int idade, String genero, String rg, String cpf, String setor, int horarioTrabralhos, double salaraio, String status, String admissao, String demissao){
+    public Boolean alterar(int id, int id_dados_pessoais_funcionario, String nome, String data_afastamento, String motivo){
         try{
-            sql = "UPDATE DADOS_PESSOAIS_FUNCIONARIO SET ID_CIDADE = ?, ID_ESTADO_CIVIL = ?, NOME = ?, SOBRENOME = ?, GENERO = ?, RG = ?, CPF = ?, SETOR = ?, HORARIOTRABALHOS = ?, SALARIIO = ?, STATUS = ?, ADMISSAO = ?, DEMISSAO = ?, WHERE ID = ?";
+            sql = "UPDATE ATESTADOS SET DADOS_PESSOAIS_FUNCIONARIO = ?,  NOME = ?, DATA_AFASTAMENTO = ?, MOTIVO = ?,  WHERE ID = ?";
             
             setStatement(getConexao().prepareStatement(sql));
             
             getStatement().setInt(1, id);
-            getStatement().setInt(2, idCidade);
-            getStatement().setInt(3, idEstadoCivil);
-            getStatement().setString(4, nome);
-            getStatement().setString(5, sobrenome);
-            getStatement().setInt(6, idade);
-            getStatement().setString(7, genero);
-            getStatement().setString(8, rg);
-            getStatement().setString(9, cpf);
-            getStatement().setString(10, setor);
-            getStatement().setInt(11, horarioTrabralhos);
-            getStatement().setDouble(12, salaraio);
-            getStatement().setString(13, status);
-            getStatement().setString(14, admissao);
-            getStatement().setString(15, demissao);
+            getStatement().setInt(2, id_dados_pessoais_funcionario);          
+            getStatement().setString(3, nome);
+            getStatement().setString(5, data_afastamento);           
+            getStatement().setString(6, motivo);
             
             getStatement().executeUpdate();
             
@@ -83,7 +63,7 @@ public class DaoAtestado extends BancoDeDadosMySql {
     
      public Boolean excluir(int id){
         try{
-            sql = "DELETE FROM DADOS_PESSOAIS_FUNCIONARIO WHERE ID = ?";
+            sql = "DELETE FROM ATESTADOS WHERE ID = ?";
             
             setStatement(getConexao().prepareStatement(sql));
             
