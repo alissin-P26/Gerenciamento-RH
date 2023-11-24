@@ -42,6 +42,7 @@ com\mycompany\ferramentas\Formularios.class
 com\mycompany\visao\estado_civil\CadEstado_civil$1.class
 com\mycompany\ferramentas\BancoDeDadosMySql.class
 com\mycompany\visao\outros\MenuPrincipal$2.class
+com\mycompany\visao\atestado\CadAtestado$3.class
 com\mycompany\visao\funcionario_dadosPessoais\Cad_Funcionario$5.class
 com\mycompany\visao\funcionario_dadosPessoais\Cad_Funcionario$8.class
 com\mycompany\visao\funcionario_dadosPessoais\List_Funcionario$3.class

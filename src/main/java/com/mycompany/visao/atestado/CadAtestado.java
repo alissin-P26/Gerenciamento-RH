@@ -28,7 +28,7 @@ public class CadAtestado extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         tfId = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tfId_dados_pessoais_funcionario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -43,10 +43,10 @@ public class CadAtestado extends javax.swing.JFrame {
 
         jLabel1.setText("ID");
 
-        jTextField2.setText("id_dados_pessoais_funcionario");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        tfId_dados_pessoais_funcionario.setText("id_dados_pessoais_funcionario");
+        tfId_dados_pessoais_funcionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                tfId_dados_pessoais_funcionarioActionPerformed(evt);
             }
         });
 
@@ -64,6 +64,11 @@ public class CadAtestado extends javax.swing.JFrame {
         jScrollPane1.setViewportView(taMotivo);
 
         btnAcao.setText("Salvar");
+        btnAcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcaoActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
 
@@ -79,7 +84,7 @@ public class CadAtestado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tfId_dados_pessoais_funcionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -102,7 +107,7 @@ public class CadAtestado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfId_dados_pessoais_funcionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -125,9 +130,13 @@ public class CadAtestado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void tfId_dados_pessoais_funcionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfId_dados_pessoais_funcionarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_tfId_dados_pessoais_funcionarioActionPerformed
+
+    private void btnAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcaoActionPerformed
+        
+    }//GEN-LAST:event_btnAcaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,10 +181,10 @@ public class CadAtestado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextArea taMotivo;
     private javax.swing.JTextField tfDataAfastamento;
     private javax.swing.JTextField tfId;
+    private javax.swing.JTextField tfId_dados_pessoais_funcionario;
     private javax.swing.JTextField tfNome;
     // End of variables declaration//GEN-END:variables
 }
