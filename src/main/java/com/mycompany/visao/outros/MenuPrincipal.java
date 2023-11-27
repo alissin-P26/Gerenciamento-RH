@@ -6,7 +6,7 @@ package com.mycompany.visao.outros;
 
 import com.mycompany.ferramentas.BancoDeDadosMySql;
 import com.mycompany.ferramentas.Formularios;
-import com.mycompany.visao.FrontRH.CadFuncionario_RH;
+import com.mycompany.visao.telaloginRH.CadFuncionario_RH;
 import com.mycompany.visao.atestado.CadAtestado;
 import com.mycompany.visao.atestado.ListAtestado;
 import com.mycompany.visao.funcionario_dadosPessoais.Cad_Funcionario;

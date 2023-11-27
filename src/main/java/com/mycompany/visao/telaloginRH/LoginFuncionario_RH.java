@@ -4,6 +4,14 @@
  */
 package com.mycompany.visao.telaloginRH;
 
+import com.mycompany.dao.DaoCadRH;
+import com.mycompany.ferramentas.Constantes;
+import com.mycompany.ferramentas.DadosTemporarios;
+import com.mycompany.ferramentas.Formularios;
+import static com.mycompany.ferramentas.Formularios.CadLoginFuncionario;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jose.5989
@@ -15,6 +23,10 @@ public class LoginFuncionario_RH extends javax.swing.JFrame {
      */
     public LoginFuncionario_RH() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+        tfUsuario.setText("");
+        pfSenha.setText("");
     }
 
     /**
@@ -27,12 +39,12 @@ public class LoginFuncionario_RH extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        pfSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login Funcionário RH");
@@ -40,9 +52,9 @@ public class LoginFuncionario_RH extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Usuário");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tfUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tfUsuarioActionPerformed(evt);
             }
         });
 
@@ -50,6 +62,11 @@ public class LoginFuncionario_RH extends javax.swing.JFrame {
         jLabel2.setText("Senha");
 
         jButton1.setText("Entrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Esqueceu a senha");
 
@@ -61,17 +78,16 @@ public class LoginFuncionario_RH extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfUsuario)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jButton2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1))
-                        .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(188, 188, 188)
+                        .addComponent(jButton1))
+                    .addComponent(pfSenha))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -80,12 +96,12 @@ public class LoginFuncionario_RH extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
                 .addComponent(jLabel2)
-                .addGap(33, 33, 33)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(21, 21, 21)
+                .addComponent(pfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -97,9 +113,42 @@ public class LoginFuncionario_RH extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tfUsuarioActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+            DaoCadRH daoCadRH = new DaoCadRH();
+            
+            ResultSet resultset = daoCadRH.recuperaSenha(tfUsuario.getText());
+            
+            resultset.next();
+            int id = resultset.getInt("ID");
+            String senha = resultset.getString("SENHA");
+            
+            if(senha.equals(String.valueOf(pfSenha.getPassword()))){
+                DadosTemporarios.usuarioLogado = tfUsuario.getText();
+                
+                JOptionPane.showMessageDialog(null, "Bem-vindo(a), " + tfUsuario.getText());
+                
+                ResultSet resultSetCliente = new DaoCliente().listarPorIdPessoa(id);
+                resultSetCliente.next();
+                int idCliente = resultSetCliente.getInt("ID");
+                
+                DadosTemporarios.idUsuarioLogado = idCliente;
+                DadosTemporarios.usuarioLogado = tfUsuario.getText();
+                
+                ((CadLoginFuncionario) Formularios.CadLoginFuncionario).verificaUsuarioLogado();
+                
+                dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, Constantes.USUARIO_SENHA_INVALIDOS);
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, Constantes.USUARIO_SENHA_INVALIDOS);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,7 +192,7 @@ public class LoginFuncionario_RH extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField pfSenha;
+    private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
 }

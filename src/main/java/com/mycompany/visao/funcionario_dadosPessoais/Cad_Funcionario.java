@@ -570,7 +570,7 @@ public class Cad_Funcionario extends javax.swing.JFrame {
         }
         else if (btnAcao.getText() == Constantes.BTN_ALTERAR_TEXT){
             alterar();
-//            ((List_Funcionario) Formularios.list_Funcionario).listarTodos();
+            ((List_Funcionario) Formularios.list_Funcionario).listarTodos();
             dispose();
         }
     }//GEN-LAST:event_btnAcaoActionPerformed
