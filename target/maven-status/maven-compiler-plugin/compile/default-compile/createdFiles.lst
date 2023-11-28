@@ -14,6 +14,7 @@ com\mycompany\dao\DaoCidade.class
 com\mycompany\visao\atestado\ListAtestado$2.class
 com\mycompany\visao\cidade\CadCidade$5.class
 com\mycompany\visao\funcionario_dadosPessoais\Cad_Funcionario$3.class
+com\mycompany\visao\funcionario_dadosPessoais\List_Funcionario$5.class
 com\mycompany\visao\estado_civil\ListEstado_civil$2.class
 com\mycompany\visao\outros\MenuPrincipal$4.class
 com\mycompany\visao\cidade\ListCidade$2.class
@@ -26,6 +27,7 @@ com\mycompany\visao\telaloginRH\LoginFuncionario_RH$2.class
 com\mycompany\visao\atestado\ListAtestado.class
 com\mycompany\modelo\ModDadosPessoaisFuncionario.class
 com\mycompany\visao\funcionario_dadosPessoais\Cad_Funcionario$2.class
+com\mycompany\dao\DaoCadRH.class
 com\mycompany\ferramentas\DadosTemporarios.class
 com\mycompany\visao\cidade\ListCidade$3.class
 com\mycompany\visao\atestado\ListAtestado$1.class
@@ -33,6 +35,7 @@ com\mycompany\visao\funcionario_dadosPessoais\List_Funcionario$4.class
 com\mycompany\visao\estado\CadEstado$2.class
 com\mycompany\visao\outros\MenuPrincipal.class
 com\mycompany\visao\cidade\CadCidade$3.class
+com\mycompany\visao\atestado\CadAtestado$4.class
 com\mycompany\visao\estado_civil\ListEstado_civil.class
 com\mycompany\visao\outros\MenuPrincipal$3.class
 com\mycompany\visao\funcionario_dadosPessoais\Cad_Funcionario$9.class

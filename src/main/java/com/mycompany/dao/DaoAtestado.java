@@ -28,8 +28,8 @@ public class DaoAtestado extends BancoDeDadosMySql {
             getStatement().setInt(1, id);
             getStatement().setInt(2, id_dados_pessoais_funcionario);          
             getStatement().setString(3, nome);
-            getStatement().setString(5, data_afastamento);           
-            getStatement().setString(6, motivo);
+            getStatement().setString(4, data_afastamento);           
+            getStatement().setString(5, motivo);
           
            getStatement().executeUpdate();
            
@@ -46,11 +46,11 @@ public class DaoAtestado extends BancoDeDadosMySql {
             
             setStatement(getConexao().prepareStatement(sql));
             
-            getStatement().setInt(1, id);
-            getStatement().setInt(2, id_dados_pessoais_funcionario);          
-            getStatement().setString(3, nome);
-            getStatement().setString(5, data_afastamento);           
-            getStatement().setString(6, motivo);
+            getStatement().setInt(5, id);
+            getStatement().setInt(1, id_dados_pessoais_funcionario);          
+            getStatement().setString(2, nome);
+            getStatement().setString(3, data_afastamento);           
+            getStatement().setString(4, motivo);
             
             getStatement().executeUpdate();
             
@@ -81,30 +81,15 @@ public class DaoAtestado extends BancoDeDadosMySql {
      public ResultSet listarTodos(){
         try{    
             sql = 
-                " select                                        " +
-                "    dpf.id as id,                              " +
-                "    dpf.id_cidade as id_cidade,                " +
-                "    c.nome as cidade,                          " +
-                "    dpf.id_estado_civil as id_estado_civil,    " +
-                "    ec.nome as estado_civil,                   " +
-                "    dpf.nome as nome,                          " +
-                "    dpf.sobrenome as sobrenome,                " +
-                "    dpf.idade as idade,                        " +
-                "    dpf.genero as genero,                      " +
-                "    dpf.RG as RG,                              " +
-                "    dpf.CPF as CPF,                            " +
-                "    dpf.setor as setor,                        " +
-                "    dpf.horario_de_trabalho as horario_de_trabalho,    " +
-                "    dpf.salario as salario,                            " +
-                "    dpf.status_funcionario as status_funcionario,      " +
-                "    dpf.data_admissao as data_admissao,                " +
-                "    dpf.data_demissao as data_demissao                 " +
-                " from                                                  " +
-                "        dados_pessoais_funcionario dpf                 " +
-                " join cidade c on                                      " +
-                "        c.id = dpf.id_cidade                           " +
-                " join estado_civil ec on                               " +
-                "        ec.id = dpf.id_estado_civil                    ";
+               " select                                                 " +
+               "  a.id as id,                                           " +
+               " .nome as nome,                                         " +
+               " a.data_afastamento  as data_afastamento,               " +
+               " a.motivo as motivo                                     " +
+               " from                                                   " +
+               " atestados a                                            " +
+               " join dados_pessoais_funcionario dpf	on              " +
+               " dpf.id = a.id_dados_pessoais_funcionario               " ;
             
             setStatement(getConexao().prepareStatement(sql));
             
@@ -115,4 +100,77 @@ public class DaoAtestado extends BancoDeDadosMySql {
         
         return getResultado();
     }
+     
+     public ResultSet listarPorId(int id){
+        try{    
+            sql = 
+               " select                                                 " +
+               "  a.id as id,                                           " +
+               " .nome as nome,                                         " +
+               " a.data_afastamento  as data_afastamento,               " +
+               " a.motivo as motivo                                     " +
+               " from                                                   " +
+               " atestados a                                            " +
+               " join dados_pessoais_funcionario dpf	on              " +
+               " dpf.id = a.id_dados_pessoais_funcionario               " +
+               " where id = ? ";
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setInt(1, id);
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    } 
+     
+    public ResultSet listarPorNome(String nome){
+        try{    
+            sql =                   
+               " select                                                 " +
+               "  a.id as id,                                           " +
+               " .nome as nome,                                         " +
+               " a.data_afastamento  as data_afastamento,               " +
+               " a.motivo as motivo                                     " +
+               " from                                                   " +
+               " atestados a                                            " +
+               " join dados_pessoais_funcionario dpf	on              " +
+               " dpf.id = a.id_dados_pessoais_funcionario               " +
+               " where nome like ? ";
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setString(1, nome + "%");
+            
+            setResultado(getStatement().executeQuery());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return getResultado();
+    }
+    
+    public int buscarProximoId(){
+        int id = 0;
+        
+        try{
+            sql = "SELECT IFNULL(MAX(ID), 0) + 1 FROM ATESTADOS";
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            setResultado(getStatement().executeQuery());
+            
+            getResultado().next(); //Move para o primeiro registro.
+            
+            id = getResultado().getInt(1); //Pega o valor retornado na consulta
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+        return id;
+    }
+
 }

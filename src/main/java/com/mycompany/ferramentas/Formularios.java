@@ -19,5 +19,7 @@ public class Formularios {
     public static JFrame listAtestado;
     
     public static JFrame CadLoginFuncionario;
-     public static JFrame ListLoginFuncionario;
+    public static JFrame ListLoginFuncionario;
+    
+    
 }

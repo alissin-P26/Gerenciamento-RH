@@ -23,8 +23,6 @@ public class List_Funcionario extends javax.swing.JFrame {
     public List_Funcionario() {
         initComponents();
         
-        initComponents();
-        
         setLocationRelativeTo(null);
         
         listarTodos();
@@ -45,20 +43,20 @@ public void listarTodos(){
             defaultTableModel.setRowCount(0);
             while (resultSet.next()){
                 String id = resultSet.getString(1);
-                String idCidade = resultSet.getString(2);
-                String idEstado_Civil = resultSet.getString(3);
-                String nome = resultSet.getString(4);
-                String sobrenome = resultSet.getString(5);
-                String idade = resultSet.getString(6);
-                String genero = resultSet.getString(7);
-                String rg = resultSet.getString(8);
-                String cpf = resultSet.getString(9);
-                String setor = resultSet.getString(10);
-                String horario_de_trabalho = resultSet.getString(11);
-                String salario = resultSet.getString(12);
-                String status_funcionario = resultSet.getString(13);
-                String data_admissao = resultSet.getString(14);
-                String data_demissao = resultSet.getString(15);
+                String idCidade = resultSet.getString(3);
+                String idEstado_Civil = resultSet.getString(5);
+                String nome = resultSet.getString(6);
+                String sobrenome = resultSet.getString(7);
+                String idade = resultSet.getString(8);
+                String genero = resultSet.getString(9);
+                String rg = resultSet.getString(10);
+                String cpf = resultSet.getString(11);
+                String setor = resultSet.getString(12);
+                String horario_de_trabalho = resultSet.getString(13);
+                String salario = resultSet.getString(14);
+                String status_funcionario = resultSet.getString(15);
+                String data_admissao = resultSet.getString(16);
+                String data_demissao = resultSet.getString(17);
                 
                                                                                
                 defaultTableModel.addRow(new Object[]{id, idCidade, idEstado_Civil, nome, sobrenome, idade, genero, rg, cpf, setor, horario_de_trabalho, salario, status_funcionario, data_admissao, data_demissao, });
@@ -83,20 +81,20 @@ public void listarTodos(){
             defaultTableModel.setRowCount(0);
             while (resultSet.next()){
                 String id = resultSet.getString(1);
-                String idCidade = resultSet.getString(2);
-                String idEstado_Civil = resultSet.getString(3);
-                String nome = resultSet.getString(4);
-                String sobrenome = resultSet.getString(5);
-                String idade = resultSet.getString(6);
-                String genero = resultSet.getString(7);
-                String rg = resultSet.getString(8);
-                String cpf = resultSet.getString(9);
-                String setor = resultSet.getString(10);
-                String horario_de_trabalho = resultSet.getString(11);
-                String salario = resultSet.getString(12);
-                String status_funcionario = resultSet.getString(13);
-                String data_admissao = resultSet.getString(14);
-                String data_demissao = resultSet.getString(15);
+                String idCidade = resultSet.getString(3);
+                String idEstado_Civil = resultSet.getString(5);
+                String nome = resultSet.getString(6);
+                String sobrenome = resultSet.getString(7);
+                String idade = resultSet.getString(8);
+                String genero = resultSet.getString(9);
+                String rg = resultSet.getString(10);
+                String cpf = resultSet.getString(11);
+                String setor = resultSet.getString(12);
+                String horario_de_trabalho = resultSet.getString(13);
+                String salario = resultSet.getString(14);
+                String status_funcionario = resultSet.getString(15);
+                String data_admissao = resultSet.getString(16);
+                String data_demissao = resultSet.getString(17);
                 
                 defaultTableModel.addRow(new Object[]{ id, idCidade, idEstado_Civil, nome, sobrenome, idade, genero, rg, cpf, setor, horario_de_trabalho, salario, status_funcionario, data_admissao, data_demissao,});
             }
@@ -120,20 +118,20 @@ public void listarTodos(){
             defaultTableModel.setRowCount(0);
             while (resultSet.next()){
                 String id = resultSet.getString(1);
-                String idCidade = resultSet.getString(2);
-                String idEstado_Civil = resultSet.getString(3);
-                String nome = resultSet.getString(4);
-                String sobrenome = resultSet.getString(5);
-                String idade = resultSet.getString(6);
-                String genero = resultSet.getString(7);
-                String rg = resultSet.getString(8);
-                String cpf = resultSet.getString(9);
-                String setor = resultSet.getString(10);
-                String horario_de_trabalho = resultSet.getString(11);
-                String salario = resultSet.getString(12);
-                String status_funcionario = resultSet.getString(13);
-                String data_admissao = resultSet.getString(14);
-                String data_demissao = resultSet.getString(15);
+                String idCidade = resultSet.getString(3);
+                String idEstado_Civil = resultSet.getString(5);
+                String nome = resultSet.getString(6);
+                String sobrenome = resultSet.getString(7);
+                String idade = resultSet.getString(8);
+                String genero = resultSet.getString(9);
+                String rg = resultSet.getString(10);
+                String cpf = resultSet.getString(11);
+                String setor = resultSet.getString(12);
+                String horario_de_trabalho = resultSet.getString(13);
+                String salario = resultSet.getString(14);
+                String status_funcionario = resultSet.getString(15);
+                String data_admissao = resultSet.getString(16);
+                String data_demissao = resultSet.getString(17);
                 
                 defaultTableModel.addRow(new Object[]{id, idCidade, idEstado_Civil, nome, sobrenome, idade, genero, rg, cpf, setor, horario_de_trabalho, salario, status_funcionario, data_admissao, data_demissao,});
             }
@@ -171,6 +169,11 @@ public void listarTodos(){
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         tableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,14 +200,18 @@ public void listarTodos(){
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jcbTipoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(tfFiltro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscar)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jcbTipoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfFiltro, javax.swing.GroupLayout.DEFAULT_SIZE, 1407, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar)))
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1608, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +222,8 @@ public void listarTodos(){
                     .addComponent(tfFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -228,6 +236,20 @@ public void listarTodos(){
     private void jcbTipoFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoFiltroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbTipoFiltroActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        switch (jcbTipoFiltro.getSelectedIndex()) {
+            case 0:
+                listarTodos();
+                break;
+            case 1:
+                listarPorId(Integer.parseInt(tfFiltro.getText()));
+                break;
+            case 2:
+                listarPorNome(tfFiltro.getText());
+                break;
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments

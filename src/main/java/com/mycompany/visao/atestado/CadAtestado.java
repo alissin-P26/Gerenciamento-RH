@@ -4,6 +4,13 @@
  */
 package com.mycompany.visao.atestado;
 
+import com.mycompany.dao.DaoAtestado;
+import com.mycompany.dao.DaoCadastro_funcionário;
+import com.mycompany.dao.DaoCidade;
+import com.mycompany.ferramentas.Constantes;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jose.5989
@@ -15,8 +22,98 @@ public class CadAtestado extends javax.swing.JFrame {
      */
     public CadAtestado() {
         initComponents();
+        recuperaId_dados_pessoais_funcionario();
+        
+        if(!existeDadosTemporarios()){
+            DaoAtestado daoAtestadoo = new DaoAtestado();
+
+            int id = daoAtestadoo.buscarProximoId(); 
+            if (id > 0)
+                tfId.setText(String.valueOf(id));
+            
+            btnAcao.setText(Constantes.BTN_SALVAR_TEXT);
+            btnExcluir.setVisible(false);
+        }else{
+            btnAcao.setText(Constantes.BTN_ALTERAR_TEXT);
+            btnExcluir.setVisible(true);
+        }
     }
     
+    
+    private void inserir(){
+        DaoAtestado daoAtestado = new DaoAtestado();
+        
+        if (daoAtestado.inserir(
+                Integer.parseInt(tfId.getText()),
+                Integer.parseInt(tfId_dados_pessoais_funcionario.getText()),                  
+                tfNome.getText(),   
+                tfDataAfastamento.getText(), 
+                taMotivo.getText())){
+            
+            JOptionPane.showMessageDialog(null, "Atestado salvo com sucesso!");
+            
+            tfId.setText(String.valueOf(daoAtestado.buscarProximoId()));
+            tfNome.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível salvar o Atestado!");
+        }
+    }
+    
+    private void alterar(){
+        DaoAtestado daoAtestado = new DaoAtestado();
+        
+        if (daoAtestado.alterar(
+                Integer.parseInt(tfId.getText()),
+                Integer.parseInt(tfId_dados_pessoais_funcionario.getText()),                  
+                tfNome.getText(),   
+                tfDataAfastamento.getText(), 
+                taMotivo.getText())){
+            
+            JOptionPane.showMessageDialog(null, "Atesatado alterado com sucesso!");
+            
+            tfId.setText("");
+            tfNome.setText("");
+            tfDataAfastamento.setText("");
+            taMotivo.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível alterar o Atestado!");
+        }
+        
+//        ((List_Funcionario) Formularios.list_Funcionario).listarTodos();
+        
+        dispose();
+    }
+    
+    private void excluir(){
+        DaoAtestado daoAtestado = new DaoAtestado();
+        
+        if (daoAtestado.excluir(Integer.parseInt(tfId.getText()))){
+            JOptionPane.showMessageDialog(null, "Atestado " + tfNome.getText() + " excluído com sucesso!");
+            
+            tfId.setText("");
+            tfNome.setText("");
+            tfDataAfastamento.setText("");
+            taMotivo.setText("");
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Não foi possível excluir o Atestado!");
+        }
+        
+//        ((ListCidade) Formularios.listCidade).listarTodos();
+        
+        dispose();
+    }
+    private void recuperaId_dados_pessoais_funcionario(){
+        try{
+            DaoAtestado daoAtestado = new DaoAtestado();
+            ResultSet resultSet = daoAtestado.listarPorNome(tfId_dados_pessoais_funcionario.getSelectedText().toString());
+            
+            resultSet.next();
+            tfId_dados_pessoais_funcionario.setText(resultSet.getString("ID"));
+        }catch(Exception e){
+            System.out.println(e.getMessage());            
+        }
+    }
     
 
     /**
@@ -73,6 +170,11 @@ public class CadAtestado extends javax.swing.JFrame {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,12 +235,36 @@ public class CadAtestado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfId_dados_pessoais_funcionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfId_dados_pessoais_funcionarioActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_tfId_dados_pessoais_funcionarioActionPerformed
 
     private void btnAcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcaoActionPerformed
+        DaoAtestado daoAtestado = new DaoAtestado();
         
+        if (btnAcao.getText() == Constantes.BTN_SALVAR_TEXT){
+            inserir();
+            
+            tfId.setText(String.valueOf(daoAtestado.buscarProximoId()));
+            tfNome.setText("");
+            tfDataAfastamento.setText("");
+            taMotivo.setText("");
+        }
+        else if (btnAcao.getText() == Constantes.BTN_ALTERAR_TEXT){
+            alterar();
+           
+            dispose();
+        }        
     }//GEN-LAST:event_btnAcaoActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+         int escolha = 
+                JOptionPane.showConfirmDialog(
+                        null, 
+                        "Deseja realmente excluir a categoria " + tfNome.getText() + "?");
+        
+        if(escolha == JOptionPane.YES_OPTION)
+            excluir();     
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments

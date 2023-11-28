@@ -4,6 +4,12 @@
  */
 package com.mycompany.visao.atestado;
 
+import com.mycompany.dao.DaoAtestado;
+import com.mycompany.dao.DaoCadastro_funcionário;
+import com.mycompany.ferramentas.Formularios;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jose.5989
@@ -15,8 +21,88 @@ public class ListAtestado extends javax.swing.JFrame {
      */
     public ListAtestado() {
         initComponents();
+        setLocationRelativeTo(null);
+        
+        listarTodos();
     }
+public void listarTodos(){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableAtestados.getModel();
+            
+            tableAtestados.setModel(defaultTableModel);
 
+            DaoAtestado daoAtestado = new DaoAtestado();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoAtestado.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String nome= resultSet.getString(2);
+                String data_afastamento = resultSet.getString(3);
+                String motivo = resultSet.getString(4);
+                
+                                                                               
+                defaultTableModel.addRow(new Object[]{id, nome, data_afastamento, motivo,});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+public void listarPorId(int pId){
+        try{
+            //Define o model da tabela.
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableAtestados.getModel();
+
+            tableAtestados.setModel(defaultTableModel);
+
+         DaoAtestado daoAtestado = new DaoAtestado();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoAtestado.listarPorId(pId);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String nome = resultSet.getString(2);
+                String data_afastamento = resultSet.getString(3);
+                String motivo = resultSet.getString(4);
+               
+                
+                defaultTableModel.addRow(new Object[]{id, nome, data_afastamento, motivo,});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+public void listarPorNome(String pNome){
+        try{
+            //Define o model da tabela.
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableAtestados.getModel();
+            
+            tableAtestados.setModel(defaultTableModel);
+
+            DaoAtestado daoAtestado= new DaoAtestado();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoAtestado.listarPorNome(pNome);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String nome = resultSet.getString(2);
+                String data_afastamento = resultSet.getString(3);
+                String motivo = resultSet.getString(4);
+                
+                
+                defaultTableModel.addRow(new Object[]{id, nome, data_afastamento, motivo,});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,9 +116,14 @@ public class ListAtestado extends javax.swing.JFrame {
         tfFiltro = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableAtestados = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jcbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ID", "ID_FUNCIONARIO", "DATA_AFASTAMENTO", "MOTIVO", " " }));
         jcbTipoFiltro.addActionListener(new java.awt.event.ActionListener() {
@@ -42,8 +133,13 @@ public class ListAtestado extends javax.swing.JFrame {
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableAtestados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,7 +158,12 @@ public class ListAtestado extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tableAtestados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableAtestadosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableAtestados);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,6 +197,28 @@ public class ListAtestado extends javax.swing.JFrame {
     private void jcbTipoFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoFiltroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbTipoFiltroActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        switch (jcbTipoFiltro.getSelectedIndex()) {
+            case 0:
+                listarTodos();
+                break;
+            case 1:
+                listarPorId(Integer.parseInt(tfFiltro.getText()));
+                break;
+            case 2:
+                listarPorNome(tfFiltro.getText());
+                break;
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tableAtestadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableAtestadosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableAtestadosMouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+         Formularios.listAtestado= null;
+    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @param args the command line arguments
@@ -136,8 +259,8 @@ public class ListAtestado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<String> jcbTipoFiltro;
+    private javax.swing.JTable tableAtestados;
     private javax.swing.JTextField tfFiltro;
     // End of variables declaration//GEN-END:variables
 }
