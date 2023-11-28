@@ -168,7 +168,7 @@ public class DaoCadastro_funcionário extends BancoDeDadosMySql {
                 "        c.id = dpf.id_cidade                           " +
                 " join estado_civil ec on                               " +
                 "        ec.id = dpf.id_estado_civil                    " +
-                " where id = ? ";
+                " where dpf.id = ? ";
             
             setStatement(getConexao().prepareStatement(sql));
             
@@ -209,7 +209,7 @@ public class DaoCadastro_funcionário extends BancoDeDadosMySql {
                 "        c.id = dpf.id_cidade                           " +
                 " join estado_civil ec on                               " +
                 "        ec.id = dpf.id_estado_civil                    " +
-                " where nome like ? ";
+                " where dpf.nome like ? ";
             
             setStatement(getConexao().prepareStatement(sql));
             

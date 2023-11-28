@@ -81,15 +81,13 @@ public class DaoAtestado extends BancoDeDadosMySql {
      public ResultSet listarTodos(){
         try{    
             sql = 
-               " select                                                 " +
-               "  a.id as id,                                           " +
-               " .nome as nome,                                         " +
-               " a.data_afastamento  as data_afastamento,               " +
-               " a.motivo as motivo                                     " +
-               " from                                                   " +
-               " atestados a                                            " +
-               " join dados_pessoais_funcionario dpf	on              " +
-               " dpf.id = a.id_dados_pessoais_funcionario               " ;
+               " select                                                     " +
+               "    a.id as id,                                             " +
+               "    a.nome as nome,                                         " +
+               "    a.data_afastamento as data_afastamento,                 " +
+               "    a.motivo as motivo                                      " +
+               " from                                                       " +
+               "    atestados a                                             " ;
             
             setStatement(getConexao().prepareStatement(sql));
             
@@ -104,16 +102,14 @@ public class DaoAtestado extends BancoDeDadosMySql {
      public ResultSet listarPorId(int id){
         try{    
             sql = 
-               " select                                                 " +
-               "  a.id as id,                                           " +
-               " .nome as nome,                                         " +
-               " a.data_afastamento  as data_afastamento,               " +
-               " a.motivo as motivo                                     " +
-               " from                                                   " +
-               " atestados a                                            " +
-               " join dados_pessoais_funcionario dpf	on              " +
-               " dpf.id = a.id_dados_pessoais_funcionario               " +
-               " where id = ? ";
+               " select                                                     " +
+               "    a.id as id,                                             " +
+               "    a.nome as nome,                                         " +
+               "    a.data_afastamento as data_afastamento,                 " +
+               "    a.motivo as motivo                                      " +
+               " from                                                       " +
+               "    atestados a                                             " +
+               " where a.id = ? ";
             
             setStatement(getConexao().prepareStatement(sql));
             
@@ -130,16 +126,14 @@ public class DaoAtestado extends BancoDeDadosMySql {
     public ResultSet listarPorNome(String nome){
         try{    
             sql =                   
-               " select                                                 " +
-               "  a.id as id,                                           " +
-               " .nome as nome,                                         " +
-               " a.data_afastamento  as data_afastamento,               " +
-               " a.motivo as motivo                                     " +
-               " from                                                   " +
-               " atestados a                                            " +
-               " join dados_pessoais_funcionario dpf	on              " +
-               " dpf.id = a.id_dados_pessoais_funcionario               " +
-               " where nome like ? ";
+               " select                                                     " +
+               "    a.id as id,                                             " +
+               "    a.nome as nome,                                         " +
+               "    a.data_afastamento as data_afastamento,                 " +
+               "    a.motivo as motivo                                      " +
+               " from                                                       " +
+               "    atestados a                                             " +
+               " where a.nome like ? ";
             
             setStatement(getConexao().prepareStatement(sql));
             

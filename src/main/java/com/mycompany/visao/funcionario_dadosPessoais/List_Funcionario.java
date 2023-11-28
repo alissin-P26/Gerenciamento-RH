@@ -8,6 +8,7 @@ import com.mycompany.dao.DaoCadastro_funcionário;
 import com.mycompany.ferramentas.DadosTemporarios;
 import com.mycompany.ferramentas.Formularios;
 import com.mycompany.modelo.ModDadosPessoaisFuncionario;
+import com.mycompany.visao.atestado.CadAtestado;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
@@ -73,7 +74,7 @@ public void listarTodos(){
 
             tableFuncionario.setModel(defaultTableModel);
 
-         DaoCadastro_funcionário daoCadastro_funcionário = new DaoCadastro_funcionário();
+            DaoCadastro_funcionário daoCadastro_funcionário = new DaoCadastro_funcionário();
 
             //Atribui o resultset retornado a uma variável para ser usada.
             ResultSet resultSet = daoCadastro_funcionário.listarPorId(pId);
@@ -194,6 +195,11 @@ public void listarTodos(){
                 return canEdit [columnIndex];
             }
         });
+        tableFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableFuncionarioMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableFuncionario);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -250,6 +256,22 @@ public void listarTodos(){
                 break;
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tableFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFuncionarioMouseClicked
+        if(evt.getClickCount() == 2){
+            ModDadosPessoaisFuncionario modDadosPessoaisFuncionario = new ModDadosPessoaisFuncionario();
+
+            modDadosPessoaisFuncionario.setId(Integer.parseInt(String.valueOf(tableFuncionario.getValueAt(tableFuncionario.getSelectedRow(), 0))));
+            modDadosPessoaisFuncionario.setNome(String.valueOf(tableFuncionario.getValueAt(tableFuncionario.getSelectedRow(), 3)));
+            modDadosPessoaisFuncionario.setSobrenome(String.valueOf(tableFuncionario.getValueAt(tableFuncionario.getSelectedRow(), 4)));
+
+            DadosTemporarios.tempObject = modDadosPessoaisFuncionario;
+
+            ((CadAtestado) Formularios.CadAtestado).recuperaFuncionario();
+
+            dispose();
+        }
+    }//GEN-LAST:event_tableFuncionarioMouseClicked
 
     /**
      * @param args the command line arguments

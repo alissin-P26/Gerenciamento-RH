@@ -19,6 +19,7 @@ com\mycompany\visao\funcionario_dadosPessoais\Cad_Funcionario$3.class
 com\mycompany\visao\funcionario_dadosPessoais\List_Funcionario$5.class
 com\mycompany\visao\estado_civil\ListEstado_civil$2.class
 com\mycompany\visao\outros\MenuPrincipal$4.class
+com\mycompany\visao\atestado\CadAtestado$5.class
 com\mycompany\visao\cidade\ListCidade$2.class
 com\mycompany\visao\funcionario_dadosPessoais\Cad_Funcionario$10.class
 com\mycompany\ferramentas\Constantes.class
@@ -45,6 +46,7 @@ com\mycompany\visao\funcionario_dadosPessoais\Cad_Funcionario$1.class
 com\mycompany\visao\telaloginRH\CadFuncionario_RH$1.class
 com\mycompany\visao\outros\MenuPrincipal$5.class
 com\mycompany\visao\telaloginRH\LoginFuncionario_RH$3.class
+com\mycompany\visao\funcionario_dadosPessoais\List_Funcionario$6.class
 com\mycompany\ferramentas\Formularios.class
 com\mycompany\visao\estado_civil\CadEstado_civil$1.class
 com\mycompany\ferramentas\BancoDeDadosMySql.class
