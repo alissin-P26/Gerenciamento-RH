@@ -15,7 +15,7 @@ public class ModAtestados {
     private String data_afastamento;
     private String motivo;
     
-    public ModAtestados){
+    public ModAtestados(){
     }
     
     public ModAtestados(int id, int id_dados_pessoais_funcionario, String nome, String data_afastamento, String motivo){
