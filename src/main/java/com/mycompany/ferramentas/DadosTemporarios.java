@@ -10,4 +10,6 @@ package com.mycompany.ferramentas;
  */
 public class DadosTemporarios {
     public static Object tempObject;
+    
+    
 }

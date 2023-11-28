@@ -128,18 +128,18 @@ public class LoginFuncionario_RH extends javax.swing.JFrame {
             String senha = resultset.getString("SENHA");
             
             if(senha.equals(String.valueOf(pfSenha.getPassword()))){
-                DadosTemporarios.usuarioLogado = tfUsuario.getText();
+//                DadosTemporarios.usuarioLogado = tfUsuario.getText();
                 
                 JOptionPane.showMessageDialog(null, "Bem-vindo(a), " + tfUsuario.getText());
                 
-                ResultSet resultSetCliente = new DaoCliente().listarPorIdPessoa(id);
-                resultSetCliente.next();
-                int idCliente = resultSetCliente.getInt("ID");
+//                ResultSet resultSetCliente = new DaoCadRH().listarPorIdPessoa(id);
+//                resultSetCliente.next();
+//                int idCliente = resultSetCliente.getInt("ID");
                 
-                DadosTemporarios.idUsuarioLogado = idCliente;
-                DadosTemporarios.usuarioLogado = tfUsuario.getText();
-                
-                ((CadLoginFuncionario) Formularios.CadLoginFuncionario).verificaUsuarioLogado();
+//                DadosTemporarios.idUsuarioLogado = idCliente;
+//                DadosTemporarios.usuarioLogado = tfUsuario.getText();
+//                
+//                ((CadLoginFuncionario) Formularios.CadLoginFuncionario).verificaUsuarioLogado();
                 
                 dispose();
             }else{

@@ -24,19 +24,19 @@ public class CadAtestado extends javax.swing.JFrame {
         initComponents();
         recuperaId_dados_pessoais_funcionario();
         
-        if(!existeDadosTemporarios()){
-            DaoAtestado daoAtestadoo = new DaoAtestado();
-
-            int id = daoAtestadoo.buscarProximoId(); 
-            if (id > 0)
-                tfId.setText(String.valueOf(id));
-            
-            btnAcao.setText(Constantes.BTN_SALVAR_TEXT);
-            btnExcluir.setVisible(false);
-        }else{
-            btnAcao.setText(Constantes.BTN_ALTERAR_TEXT);
-            btnExcluir.setVisible(true);
-        }
+//        if(!existeDadosTemporarios()){
+//            DaoAtestado daoAtestadoo = new DaoAtestado();
+//
+//            int id = daoAtestadoo.buscarProximoId(); 
+//            if (id > 0)
+//                tfId.setText(String.valueOf(id));
+//            
+//            btnAcao.setText(Constantes.BTN_SALVAR_TEXT);
+//            btnExcluir.setVisible(false);
+//        }else{
+//            btnAcao.setText(Constantes.BTN_ALTERAR_TEXT);
+//            btnExcluir.setVisible(true);
+//        }
     }
     
     
