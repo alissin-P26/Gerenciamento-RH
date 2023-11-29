@@ -9,6 +9,7 @@ import com.mycompany.ferramentas.Constantes;
 import com.mycompany.ferramentas.DadosTemporarios;
 import com.mycompany.ferramentas.Formularios;
 import static com.mycompany.ferramentas.Formularios.CadLoginFuncionario;
+import com.mycompany.visao.funcionario_dadosPessoais.Cad_Funcionario;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
@@ -147,6 +148,12 @@ public class LoginFuncionario_RH extends javax.swing.JFrame {
             }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, Constantes.USUARIO_SENHA_INVALIDOS);
+        //}if (Formularios.cad_funcionario == null){
+        //    Formularios.cad_funcionario = new Cad_Funcionario();
+        
+        //Formularios.cad_funcionario.setVisible(true);
+        //}else{
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -51,10 +51,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        Cadastros = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        Consultas = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -71,7 +71,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Desenvolvido por Alisson");
 
-        jMenu1.setText("Cadastros");
+        Cadastros.setText("Cadastros");
 
         jMenuItem1.setText("Dados pessoais do funcionário");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +79,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        Cadastros.add(jMenuItem1);
 
         jMenuItem3.setText("Atestados");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -87,11 +87,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        Cadastros.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(Cadastros);
 
-        jMenu2.setText("Consultas");
+        Consultas.setText("Consultas");
 
         jMenuItem2.setText("Consulta Funcionario");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +99,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        Consultas.add(jMenuItem2);
 
         jMenuItem4.setText("Consulta Atestados");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -107,9 +107,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        Consultas.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(Consultas);
 
         jMenu3.setText("Login - RH");
 
@@ -153,8 +153,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addContainerGap())
@@ -241,10 +240,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu Cadastros;
+    private javax.swing.JMenu Consultas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;

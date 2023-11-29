@@ -21,5 +21,9 @@ public class Formularios {
     public static JFrame CadLoginFuncionario;
     public static JFrame ListLoginFuncionario;
     
+    public static JFrame cadCidade;
+    public static JFrame listCidade;
+    
+    
     
 }

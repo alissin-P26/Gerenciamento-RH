@@ -4,6 +4,14 @@
  */
 package com.mycompany.visao.cidade;
 
+import com.mycompany.dao.DaoCidade;
+import com.mycompany.dao.DaoEstado;
+import com.mycompany.ferramentas.DadosTemporarios;
+import com.mycompany.ferramentas.Formularios;
+import com.mycompany.modelo.ModCidade;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author jose.5989
@@ -15,6 +23,110 @@ public class ListCidade extends javax.swing.JFrame {
      */
     public ListCidade() {
         initComponents();
+        
+        
+        setLocationRelativeTo(null);
+        
+        listarTodos();
+    }
+    public void listarTodos(){
+        try{
+            //Pega o model da tabela definido no design
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCidade.getModel();
+            
+            tableCidade.setModel(defaultTableModel);
+
+            DaoCidade daoCidade = new DaoCidade();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCidade.listarTodos();
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String estado = resultSet.getString(2);
+                String cidade = resultSet.getString(3);
+                
+                defaultTableModel.addRow(new Object[]{id, estado, cidade});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorId(int pId){
+        try{
+            //Define o model da tabela.
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCidade.getModel();
+
+            tableCidade.setModel(defaultTableModel);
+
+            DaoCidade daoCidade = new DaoCidade();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = daoCidade.listarPorId(pId);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String estado = resultSet.getString(2);
+                String cidade = resultSet.getString(3);
+                
+                defaultTableModel.addRow(new Object[]{id, estado, cidade});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorNome(String pNome){
+        try{
+            //Define o model da tabela.
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCidade.getModel();
+            
+            tableCidade.setModel(defaultTableModel);
+
+            DaoCidade DaoCidade = new DaoCidade();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = DaoCidade.listarPorNome(pNome);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String estado = resultSet.getString(2);
+                String cidade = resultSet.getString(3);
+                
+                defaultTableModel.addRow(new Object[]{id, estado, cidade});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarPorEstado(String pEstado){
+        try{
+            //Define o model da tabela.
+            DefaultTableModel defaultTableModel = (DefaultTableModel) tableCidade.getModel();
+            
+            tableCidade.setModel(defaultTableModel);
+
+            DaoCidade DaoCidade = new DaoCidade();
+
+            //Atribui o resultset retornado a uma variável para ser usada.
+            ResultSet resultSet = DaoCidade.listarPorEstado(pEstado);
+            
+            defaultTableModel.setRowCount(0);
+            while (resultSet.next()){
+                String id = resultSet.getString(1);
+                String estado = resultSet.getString(2);
+                String cidade = resultSet.getString(3);
+                
+                defaultTableModel.addRow(new Object[]{id, estado, cidade});
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -26,25 +138,35 @@ public class ListCidade extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jcbTipoFiltro = new javax.swing.JComboBox<>();
+        tfFiltro = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableCidade = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta Cidade");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ID", "ESTADO", "CIDADE" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
             }
         });
 
-        jButton1.setText("Buscar");
+        jcbTipoFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ID", "ESTADO", "CIDADE" }));
+        jcbTipoFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoFiltroActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        tableCidade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -63,7 +185,12 @@ public class ListCidade extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tableCidade.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableCidadeMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableCidade);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,11 +198,11 @@ public class ListCidade extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbTipoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnBuscar)
                 .addContainerGap())
             .addComponent(jScrollPane1)
         );
@@ -84,9 +211,9 @@ public class ListCidade extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jcbTipoFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar))
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -95,9 +222,57 @@ public class ListCidade extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jcbTipoFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoFiltroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jcbTipoFiltroActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+         switch (jcbTipoFiltro.getSelectedIndex()){
+            case 0:
+                listarTodos();
+                break;
+            case 1:
+                listarPorId(Integer.parseInt(tfFiltro.getText()));
+                break;
+            case 2:
+                listarPorEstado(tfFiltro.getText());
+                break;
+            case 3:
+                listarPorNome(tfFiltro.getText());
+                break;
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tableCidadeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCidadeMouseClicked
+         try{
+            if (evt.getClickCount() == 2){
+                ModCidade modCidade = new ModCidade();
+
+                modCidade.setId(Integer.parseInt(String.valueOf(tableCidade.getValueAt(tableCidade.getSelectedRow(), 0))));
+                modCidade.setNome(String.valueOf(tableCidade.getValueAt(tableCidade.getSelectedRow(), 2)));
+
+                DaoEstado daoEstado = new DaoEstado();
+                ResultSet resultSet = daoEstado.listarPorNome(String.valueOf(tableCidade.getValueAt(tableCidade.getSelectedRow(), 1)), false);
+
+                int idEstado = -1;
+                while(resultSet.next())
+                    idEstado = resultSet.getInt("ID");
+
+                modCidade.setIdEstado(idEstado);
+                
+                DadosTemporarios.tempObject = (ModCidade) modCidade;
+
+                CadCidade cadCidade = new CadCidade();
+                cadCidade.setVisible(true);
+            }
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+    }//GEN-LAST:event_tableCidadeMouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        Formularios.listCidade = null;
+    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @param args the command line arguments
@@ -135,10 +310,10 @@ public class ListCidade extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> jcbTipoFiltro;
+    private javax.swing.JTable tableCidade;
+    private javax.swing.JTextField tfFiltro;
     // End of variables declaration//GEN-END:variables
 }

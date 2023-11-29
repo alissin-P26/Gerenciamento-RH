@@ -123,7 +123,7 @@ public class DaoCadRH extends BancoDeDadosMySql{
                 "	CADASTRO_DE_GERENCIAMENTORH crh             " +
                 "   join dados_pessoais_funcionario dpf on          " +
                 "	dpf.id = crh.id_dados_pessoais_funcionario  " +                
-                " where nome like ? ";
+                " where crh.nome like ? ";
             
             setStatement(getConexao().prepareStatement(sql));
             
@@ -144,8 +144,8 @@ public class DaoCadRH extends BancoDeDadosMySql{
                 "   ID,                             " +
                 "   SENHA                           " +
                 " FROM                              " +
-                "   CADASTRO_DE_GERENCIAMENTORH                          " +
-                " WHERE USUARIO = ?                 " ;
+                "   CADASTRO_DE_GERENCIAMENTORH     " +
+                " WHERE crh.USUARIO = ?                 " ;
             
             setStatement(getConexao().prepareStatement(sql));
             
